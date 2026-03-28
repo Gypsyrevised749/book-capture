@@ -1,6 +1,6 @@
 # Book Capture
 
-[![release](https://img.shields.io/badge/release-v1.0.0-blue)](https://github.com/yoichirohara/book-capture/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet)](https://docs.anthropic.com/en/docs/claude-code)
+[![release](https://img.shields.io/badge/release-v1.1.0-blue)](https://github.com/masterleopold/book-capture/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet)](https://docs.anthropic.com/en/docs/claude-code)
 
 > Capture books from Kindle, Apple Books, or PDF — then OCR and generate structured Markdown.
 
@@ -35,7 +35,7 @@ In Claude Code, run:
 ```
 
 1. Navigate to the **Marketplaces** tab
-2. Select **Add marketplace** and enter: `yoichirohara/book-capture`
+2. Select **Add marketplace** and enter: `masterleopold/book-capture`
 3. Navigate to the **Discover** tab
 4. Find **book-capture** and install it
 
@@ -49,7 +49,7 @@ After installation, the commands are available in every Claude Code session.
 ### Try It (one-time)
 
 ```bash
-git clone https://github.com/yoichirohara/book-capture.git
+git clone https://github.com/masterleopold/book-capture.git
 claude --plugin-dir ./book-capture
 ```
 
