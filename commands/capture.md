@@ -147,12 +147,27 @@ After all agents complete, merge results back into `raw_text.json`:
 
 ### 4a. Plan thematic structure
 
-Read `raw_text.json` and concatenate all page text. Analyze to identify **8-14 thematic categories** organized by information type (methodology, case studies, frameworks, principles, etc.), NOT by original chapter order.
+Read `raw_text.json` and concatenate all page text. Count total pages and total character length.
+
+**Dynamic theme count** — determine the number of thematic categories based on content volume:
+
+| Book size | Pages | Approx chars | Theme count |
+|-----------|-------|-------------|-------------|
+| Short | ~30-80 | <80K | 4-6 |
+| Medium | ~80-200 | 80K-200K | 7-12 |
+| Long | ~200-400 | 200K-500K | 12-18 |
+| Very long | 400+ | 500K+ | 18-25 |
+
+The goal: **each theme file must contain enough source material to produce 500+ lines of detailed Markdown**. If a theme would be too thin (<300 lines of output), merge it with a related theme. If a theme is too dense (>800 lines), split it.
+
+Analyze to identify thematic categories organized by information type (methodology, case studies, frameworks, principles, etc.), NOT by original chapter order.
 
 Save the plan to `<OUTPUT_DIR>/structured.json`:
 ```json
 {
   "genre": "business-strategy",
+  "totalPages": 250,
+  "totalChars": 320000,
   "themes": [
     { "id": "01", "title": "Theme Name", "description": "3-5 sentences", "pageRanges": "5-20, 45-60", "keyTopics": ["topic1", "topic2"] }
   ],
@@ -165,7 +180,11 @@ Save the plan to `<OUTPUT_DIR>/structured.json`:
 
 Set `LOCATION_DIR` = `<VAULT_ROOT>/<Location>`
 
-Dispatch 3-5 parallel agents (subagent_type: `book-capture:content-writer`), each handling 2-4 themes:
+Dispatch parallel agents (subagent_type: `book-capture:content-writer`), each handling 2-3 themes. Scale agent count to theme count:
+- 4-6 themes: 2-3 agents
+- 7-12 themes: 3-5 agents
+- 12-18 themes: 5-7 agents
+- 18+ themes: 7-10 agents
 
 ```
 Agent prompt:
@@ -177,6 +196,15 @@ Agent prompt:
   Output directory: <LOCATION_DIR>
   Sibling themes: [all theme titles for cross-linking]
 ```
+
+**STRICT COMPLETENESS RULES — non-negotiable:**
+- Each topic file MUST be **500+ lines minimum**. Under 400 lines = failure. Aim for 500-800 lines.
+- **Every** name, number, date, quote, statistic, framework, example, and case study from the source text MUST appear in the output. Missing information is the worst failure mode.
+- **Never summarize** when you can transcribe. Include the full detail, not a condensed version.
+- **All direct quotes** from the source must appear as `>` blockquotes — every single one, not a selection.
+- **All frameworks and models** must be fully described with every component, not just named.
+- **All comparisons** of 3+ items must be rendered as tables.
+- **All step-by-step processes** must include every step with full detail.
 
 Each agent writes topic files directly to `<LOCATION_DIR>/NN_ThemeName.md`.
 
